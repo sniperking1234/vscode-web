@@ -18,7 +18,7 @@ fse.copySync("./node_modules/vscode-textmate", "./demo/lib/vscode-textmate");
 if(fs.existsSync('./demo/dist/extensions/vscode-web-playground')){
     fs.rmdirSync('./demo/dist/extensions/vscode-web-playground', { recursive: true })
 }
-child_process.execSync('git clone -b custom https://github.com/sniperking1234/vscode-web-playground.git  demo/dist/extensions/vscode-web-playground', {stdio: 'inherit'});
+child_process.execSync('git clone -b muti https://github.com/sniperking1234/vscode-web-playground.git  demo/dist/extensions/vscode-web-playground', {stdio: 'inherit'});
 process.chdir('demo/dist/extensions/vscode-web-playground');
 child_process.execSync('yarn', {stdio: 'inherit'});
 child_process.execSync('yarn compile', {stdio: 'inherit'});
