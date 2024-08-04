@@ -1,10 +1,8 @@
 import {
-  create,
-  IWorkbenchConstructionOptions,
-  IWorkspaceProvider,
-  IWorkspace,
+  create
 } from "vs/workbench/workbench.web.main";
 import { URI, UriComponents } from "vs/base/common/uri";
+import { IWorkbenchConstructionOptions, IWorkspace, IWorkspaceProvider } from "vs/workbench/browser/web.api";
 declare const window: any;
 
 (async function () {
@@ -12,12 +10,13 @@ declare const window: any;
   let config: IWorkbenchConstructionOptions & {
     folderUri?: UriComponents;
     workspaceUri?: UriComponents;
+    domElementId?: string;
   } = {};
 
   if (window.product) {
     config = window.product;
   } else {
-    const result = await fetch("/product.json");
+    const result = await fetch("product.json");
     config = await result.json();
   }
 
@@ -50,5 +49,9 @@ declare const window: any;
     config = { ...config, workspaceProvider };
   }
 
-  create(document.body, config);
+  const domElement = !!config.domElementId
+    && document.getElementById(config.domElementId)
+    || document.body;
+
+  create(domElement, config);
 })();
